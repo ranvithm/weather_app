@@ -1,0 +1,22 @@
+.WeatherInfoList {
+    display: flex;
+}
+
+.weather--info--list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 70%;
+    margin: auto;
+}
+
+.weather-type img {
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+}
+
+.weather--type-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+}

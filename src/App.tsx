@@ -1,24 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Header from "./components/header/header";
+import WeatherDetails from "./page/weather-details";
+import WeatherSearchList from "./page/weather-search-list";
 
 function App() {
+  const [selectedCity, setSelectCity] = useState<any>(null)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header title={selectedCity ? `${selectedCity?.name}, ${selectedCity?.sys?.country} - Weather Information` : 'Weather Application'} />
+      {selectedCity ? <WeatherDetails weather={selectedCity} setSelectCity={setSelectCity} /> : <WeatherSearchList setSelectCity={setSelectCity} />}
     </div>
   );
 }

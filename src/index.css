@@ -1,13 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap');
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+    height: 100vh;
+    width: 100vw;
+    background-color: #f1f9ff;
+    display: flex;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    height: 90%;
+    background-color: #90caf9;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px -1px #00000033, 0px 1px 1px 0px #00000024, 0px 1px 3px 0px #0000001f;
+    overflow: auto;
+}
+
+.WeatherSearchList {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather--list {
+    display: grid;
+    column-gap: 10px;
+    grid-auto-rows: minmax(150px, auto);
+    padding: 10px;
+    overflow: auto;
+    row-gap: 10px;
+    width: calc(100% - 20px);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.WeatherDetails {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.weather--details {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.weather--temp--group {
+    display: flex;
+    align-items: flex-end;
+}
+
+.weather--img img {
+    height: 150px;
+    width: 150px;
+}
+
+.weather--info {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+}
+
+.weather--head {
+    flex-basis: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: 600;
+}
+
+.weather--info--list {
+    flex: 1;
+}
+
+@media only screen and (max-width: 480px) {
+    .weather--list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .weather--info--list {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .weather--list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .weather--info--list {
+        width: 90%;
+    }
 }
