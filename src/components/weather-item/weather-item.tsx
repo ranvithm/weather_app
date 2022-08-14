@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
+import { kelvinToColor } from "../../helper";
 import "./weather-item.css";
 
 interface Props {
@@ -27,22 +28,23 @@ interface Props {
 
 const WeatherItem = ({ city, setSelectCity }: Props) => {
     const [weather, setWeather] = useState<any>(null);
-    const [bgColor, setBgColor] = useState<any>('') //transparent
+    const [bgColor, setBgColor] = useState<any>('transparent')
     useEffect(() => {
         const fetchWeather = async () => {
             const response = await Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=6dc117b66b6e76ce57bb6fb0ac1fad35`);
             setWeather(response.data);
-            // let temp = Math.floor(weather?.main?.temp)
-            // // console.log(temp)
-            // temp = temp < 100 ? temp : 100;
-            // let hue = 200 + (160 * (temp / 100));
-            // setBgColor(`hsl(${hue}, 70%, 50%)`)
         };
         fetchWeather()
     }, [city])
 
-    // console.log(weather);
-    return weather ? <div style={{backgroundColor: bgColor}} className="WeatherItem">
+    useEffect(() => {
+        if (weather?.main?.temp) {
+            let temp = Math.floor(weather?.main?.temp) + 273.15
+            setBgColor(kelvinToColor(temp))
+        }
+    }, [weather?.main?.temp])
+
+    return weather ? <div style={{ backgroundColor: bgColor }} className="WeatherItem">
         <div className="card--content">
             <div className="card--name">{`${weather?.name}, ${weather?.sys?.country}`}</div>
             <div className="weather--info">
