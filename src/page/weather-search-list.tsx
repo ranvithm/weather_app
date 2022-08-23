@@ -2,7 +2,7 @@ import { useState } from "react";
 import Search from "../components/search/search";
 import WeatherItem from "../components/weather-item/weather-item";
 
-const DEFAULT_CITIES = ['New York', 'London', 'Paris']
+const DEFAULT_CITIES = [{ type: 'string', name: 'New York' }, { type: 'string', name: 'London' }, { type: 'string', name: 'Paris' }]
 
 interface Props {
   setSelectCity: Function
@@ -11,9 +11,13 @@ interface Props {
 const WeatherSearchList = ({ setSelectCity }: Props) => {
   const [cityLists, setCityList] = useState([...DEFAULT_CITIES])
 
-  const updateCity = (city: string) => {
+  const updateCity = (val: string, data: any) => {
     let _cities = [...cityLists]
-    _cities.push(city)
+    if (val === 'data') {
+      _cities.push({ type: 'data', name: data })
+    } else {
+      _cities.push({ type: 'string', name: val })
+    }
     setCityList(_cities)
   }
 

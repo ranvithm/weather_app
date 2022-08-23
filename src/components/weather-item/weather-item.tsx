@@ -4,7 +4,7 @@ import { kelvinToColor } from "../../helper";
 import "./weather-item.css";
 
 interface Props {
-    city: String,
+    city: any,
     setSelectCity: Function
 }
 
@@ -30,11 +30,15 @@ const WeatherItem = ({ city, setSelectCity }: Props) => {
     const [weather, setWeather] = useState<any>(null);
     const [bgColor, setBgColor] = useState<any>('transparent')
     useEffect(() => {
-        const fetchWeather = async () => {
-            const response = await Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=6dc117b66b6e76ce57bb6fb0ac1fad35`);
+        const fetchWeather = async (val: string) => {
+            const response = await Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${val}&units=metric&APPID=6dc117b66b6e76ce57bb6fb0ac1fad35`);
             setWeather(response.data);
         };
-        fetchWeather()
+        if (city.type === 'string') fetchWeather(city.name)
+        else {
+            let _val = city.name
+            setWeather(_val.data);
+        }
     }, [city])
 
     useEffect(() => {
